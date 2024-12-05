@@ -29,6 +29,14 @@ def index(index_name: str, threads: Optional[int] = 8):
     
     return {200: "OK"}
 
+@app.get("/index-ready/")
+def get_index_stats(index_name: str) -> bool:
+    try:
+        searcher = SimpleSearcher(index_name)
+        return True
+    except:
+        return False
+
 @app.get("/lexical/search/")
 def search(index_name: str,
            q: str,
